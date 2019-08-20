@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.11
+FROM phusion/baseimage:latest
 MAINTAINER Holger Schinzel <holger@dash.org>
 
 ARG USER_ID
