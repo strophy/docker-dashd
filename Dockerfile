@@ -1,4 +1,4 @@
-FROM phusion/baseimage
+FROM phusion/baseimage:0.11
 MAINTAINER Holger Schinzel <holger@dash.org>
 
 ARG USER_ID
@@ -13,6 +13,8 @@ RUN groupadd -g ${GROUP_ID} dash
 RUN useradd -u ${USER_ID} -g dash -s /bin/bash -m -d /dash dash
 
 RUN chown dash:dash -R /dash
+
+RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 
 ADD https://github.com/dashpay/dash/releases/download/v0.14.0.3/dashcore-0.14.0.3-x86_64-linux-gnu.tar.gz /tmp/
 RUN tar -xvf /tmp/dashcore-*.tar.gz -C /tmp/
