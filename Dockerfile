@@ -16,7 +16,7 @@ RUN chown dash:dash -R /dash
 
 RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 
-ADD https://github.com/dashpay/dash/releases/download/v0.14.0.3/dashcore-0.14.0.3-x86_64-linux-gnu.tar.gz /tmp/
+ADD https://github.com/dashpay/dash/releases/download/v0.14.0.5/dashcore-0.14.0.5-x86_64-linux-gnu.tar.gz /tmp/
 RUN tar -xvf /tmp/dashcore-*.tar.gz -C /tmp/
 RUN cp /tmp/dashcore*/bin/*  /usr/local/bin
 RUN rm -rf /tmp/dashcore*
