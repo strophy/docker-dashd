@@ -14,7 +14,10 @@ RUN useradd -u ${USER_ID} -g dash -s /bin/bash -m -d /dash dash
 RUN mkdir /dash/.dashcore
 RUN chown dash:dash -R /dash
 
-ADD https://github.com/dashpay/dash/releases/download/v0.15.0.0/dashcore-0.15.0.0-x86_64-linux-gnu.tar.gz /tmp/
+RUN apt-get update
+RUN /sbin/install_clean -y wget
+
+RUN wget https://github.com/dashpay/dash/releases/download/v0.15.0.0/dashcore-0.15.0.0-$(uname -m)-linux-gnu.tar.gz -P /tmp
 RUN tar -xvf /tmp/dashcore-*.tar.gz -C /tmp/
 RUN cp /tmp/dashcore*/bin/*  /usr/local/bin
 RUN rm -rf /tmp/dashcore*
