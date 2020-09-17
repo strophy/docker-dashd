@@ -19,7 +19,9 @@ RUN apt-get update
 RUN /sbin/install_clean -y wget
 
 RUN mach=$(uname -m)
+RUN echo $mach
 RUN case $mach in armv7l) arch="arm-linux-gnueabihf"; ;; aarch64) arch="aarch64-linux-gnu"; ;; x86_64) arch="x86_64-linux-gnu"; ;;  *) echo "ERROR: Machine type $mach not supported."; ;; esac
+RUN echo $arch 
 RUN wget https://github.com/dashpay/dash/releases/download/${VERSION}/dashcore-${VERSION}-$arch.tar.gz -P /tmp
 RUN tar -xvf /tmp/dashcore-*.tar.gz -C /tmp/
 RUN cp /tmp/dashcore*/bin/*  /usr/local/bin
