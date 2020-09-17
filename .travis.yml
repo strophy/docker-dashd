@@ -1,4 +1,5 @@
 language: bash
+dist: focal
 services: docker
 
 env:
