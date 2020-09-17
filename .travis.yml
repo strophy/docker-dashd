@@ -2,6 +2,12 @@ language: bash
 dist: focal
 sudo: required
 
+addons:
+  apt:
+    update: true
+    sources:
+      - sourceline: 'deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
+
 env:
   global:
     - TAG=0.16.0.0-rc3
@@ -9,6 +15,7 @@ env:
 before_install:
   - export DOCKER_CLI_EXPERIMENTAL=enabled
   - docker run --rm --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce=5:19.03.12~3-0~ubuntu-focal
   - docker version
   - docker info
   - docker buildx version
