@@ -3,6 +3,7 @@ LABEL maintainer="holger@dash.org,leon.white@dash.org"
 
 ARG USER_ID
 ARG GROUP_ID
+ARG VERSION
 
 ENV HOME /dash
 
@@ -17,7 +18,8 @@ RUN chown dash:dash -R /dash
 RUN apt-get update
 RUN /sbin/install_clean -y wget
 
-RUN wget https://github.com/dashpay/dash/releases/download/v0.16.0.0-rc3/dashcore-0.16.0.0-rc3-$(uname -m)-linux-gnu.tar.gz -P /tmp
+RUN case $(uname -m) in  armv7l) arch="arm-linux-gnueabihf"; ;; aarch64) arch="aarch64-linux-gnu"; ;; x86_64) arch="x86_64-linux-gnu"; ;;  *) echo "ERROR: Machine type ($(uname -m)) not supported."; ;; esac
+RUN wget https://github.com/dashpay/dash/releases/download/${VERSION}/dashcore-${VERSION}-$arch.tar.gz -P /tmp
 RUN tar -xvf /tmp/dashcore-*.tar.gz -C /tmp/
 RUN cp /tmp/dashcore*/bin/*  /usr/local/bin
 RUN rm -rf /tmp/dashcore*
