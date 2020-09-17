@@ -13,11 +13,8 @@ env:
     - TAG=0.16.0.0-rc3
     - DOCKER_CLI_EXPERIMENTAL=enabled
 
-before_install:
-  - docker run --rm --privileged docker/binfmt
-
 install:
-  - sudo apt-get -y install docker-ce
+  - sudo apt-get -y install docker-ce binfmt-support
   - git clone https://github.com/docker-library/official-images.git official-images
   - docker buildx create --name xbuilder --use
 
