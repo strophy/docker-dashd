@@ -18,6 +18,7 @@ install:
 before_script:
   - image="strophy/dashd:$TAG"
   - docker version
+  - docker info
   - docker buildx version
 
 script:
@@ -27,5 +28,9 @@ script:
 
 after_script:
   - docker images
+
+after_failure:
+  - sudo systemctl status docker.service
+  - sudo journalctl -xe
 
 # vim:set et ts=2 sw=2:
