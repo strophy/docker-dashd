@@ -10,7 +10,7 @@ env:
 
 before_install:
   - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
-  - sudo service docker start
+  - sudo systemctl restart docker
 
 install:
   - git clone https://github.com/docker-library/official-images.git official-images
