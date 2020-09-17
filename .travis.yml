@@ -1,11 +1,16 @@
 language: bash
 dist: focal
-services: docker
+sudo: required
 
 env:
-  - TAG=0.16.0.0-rc3 DOCKER_CLI_EXPERIMENTAL=enabled
+  - TAG=0.16.0.0-rc3
 
 install:
+  - curl -fsSL https://get.docker.com | sh
+  - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
+  - mkdir -p $HOME/.docker
+  - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
+  - sudo service docker start
   - git clone https://github.com/docker-library/official-images.git official-images
 
 before_script:
