@@ -3,7 +3,7 @@ LABEL maintainer="holger@dash.org,leon.white@dash.org"
 
 ARG USER_ID
 ARG GROUP_ID
-ARG VERSION
+ARG VERSION=0.15.0.0
 
 ENV HOME /dash
 
