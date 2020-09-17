@@ -7,23 +7,20 @@ env:
     - TAG=0.16.0.0-rc3
 
 before_install:
+  - cat /etc/docker/daemon.json
   - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
   - export DOCKER_CLI_EXPERIMENTAL=enabled
   - docker run --rm --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - sudo apt-get update
-  - apt-cache madison docker-ce
-  - sudo apt-get -y install docker-ce=5:19.03.12~3-0~ubuntu-focal
+  - sudo systemctl restart docker
+  - docker version
+  - docker info
+  - docker buildx version
 
 install:
   - git clone https://github.com/docker-library/official-images.git official-images
 
 before_script:
   - image="strophy/dashd:$TAG"
-  - docker version
-  - docker info
-  - docker buildx version
 
 script:
   - docker build -t "$image" .
