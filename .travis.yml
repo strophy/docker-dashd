@@ -2,12 +2,6 @@ language: bash
 dist: focal
 sudo: required
 
-addons:
-  apt:
-    update: true
-    packages:
-      - docker.io
-
 env:
   global:
     - TAG=0.16.0.0-rc3
