@@ -18,7 +18,7 @@ env:
 before_install:
   - docker run --rm --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
   - |
-    if [ $BUILD == "release" ]; then
+    if [ $BUILD == "dashd" ]; then
       export TAG=curl https://api.github.com/repos/dashpay/dash/releases/latest -s | jq .tag_name -r | cut -c2-
     else
       export TAG=curl https://api.github.com/repos/dashpay/dash/tags -s | jq .[0].name -r | cut -c2-
